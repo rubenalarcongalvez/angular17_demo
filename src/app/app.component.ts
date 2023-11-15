@@ -10,5 +10,24 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'custom-angular-material';
+  title = 'Custom Angular Material';
+  number = 0;
+  lista = [{id: 1, nombre: 'Pepe'}, {id: 3, nombre: 'Rosario'}, {id: 2, nombre: 'Eustaquio'}, {id: 4, nombre: 'Alfonso'}, {id: 5, nombre: 'Pepe'}, {id: 6, nombre: 'Alfonso'}];
+
+  quitarElementoLista() {
+    this.lista.pop();
+  }
+
+  mostrar() {
+    this.number++;
+  }
+
+  hide() {
+    this.title = 'Custom Angular Material';
+    this.number = 0;
+  }
+
+  cambiarTitulo() {
+    this.title = '¡BOOM!';
+  }
 }

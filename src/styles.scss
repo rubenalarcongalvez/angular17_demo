@@ -1,1 +1,178 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$custom-angular-material-primary: mat.define-palette(mat.$indigo-palette);
+$custom-angular-material-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$custom-angular-material-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$custom-angular-material-theme: mat.define-light-theme((
+  color: (
+    primary: $custom-angular-material-primary,
+    accent: $custom-angular-material-accent,
+    warn: $custom-angular-material-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($custom-angular-material-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/*=============================================
+=            CUSTOM STYLE            =
+=============================================*/
+
+.contenedor-centrado {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+button {
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+
+  font-size: 20px;
+  font-weight: 500;
+  padding: 0.5em 1.2em;
+  background: #318aac;
+  border: 2px solid #318aac;
+  position: relative; /* establecemos que de aqui parte el :before para la posicion absoluta */
+}
+
+.boton {
+  &:before {
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    transition: .5s;
+  }
+
+  &:hover:before {
+    background: rgba(255, 255, 255, 0.150);
+  }
+}
+
+/* Generamos contenido antes del botón (en este caso, EN el botón) */
+.boton2 {
+  &:before {
+    border-radius: 8px; /* Como vemos, tenemos que poner un radio un poco menos curvo para que ocupe todo */
+    content:""; /* No le ponemos contenido para generar un recipiente vacio */
+    position: absolute; /* Asi podremos definir su posicion */
+    top: 0px;
+    left: 0px;
+    width: 0px; //Que no esté desplegado
+    height: 100%; //Que ocupe todo el botón
+    /* Ponemos un fondo semi-transparente para al ponerlo por encima, darle un toque blanco al original */
+    background: rgba(255, 255, 255, 0.234);
+    transition: 1s; /* Le aplicamos una transicion para que al cambiar sus propiedades al hacer hover, tarde 1s */
+  }
+
+  &:hover:before {
+    width: 100%; /* Cuando hace hover, se despliega entero el recipiente vacío */
+  }
+}
+
+.boton3 {
+  color: white;
+  background: #318aac;
+  transition: all 1s ease; /* Ponemos la transición en modo desvanecerse */
+
+  &:hover {
+    background: none;
+    color: #318aac;
+  }
+}
+
+.boton4 {
+  &:hover {
+    box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+    transition: all 0.2s ease;
+  }
+}
+
+.boton5 {
+  position: relative;
+  outline: 1px solid;
+  outline-color: rgba(49, 138, 172, 0.4);
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+
+  &:hover {
+    box-shadow: inset 0 0 20px rgba(49, 138, 172, 0.5), 0 0 20px rgba(49, 138, 172, 0.4);
+    outline-color: rgba(49, 138, 172, 0);
+    outline-offset: 80px;
+    text-shadow: 1px 1px 6px #fff;
+  }
+}
+
+.boton6 {
+  background: none;
+  border: none;
+
+  &::before {
+    z-index: -2;
+    content: "";
+    border-radius: 6px;
+    background: #318aac;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &::after {
+    z-index: -1;
+    content: "";
+    border-radius: 6px;
+    background: purple;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: .5s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+footer {
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: black;
+  color: white;
+  margin-top: 50em;
+}
+
+/*=====  Final de CUSTOM STYLE  ======*/
