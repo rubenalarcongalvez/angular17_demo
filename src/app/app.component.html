@@ -43,14 +43,17 @@
           <p>Footer visto o titulo clicado más de 2 veces</p>
         }
   
+        <!-- Para cuando está inactivo -->
         @defer (on idle) {
           <p>Idle</p>
         }
   
+        <!-- Para cuando ya está cargado -->
         @defer (on immediate) {
           <p>Immediate</p>
         }
   
+        <!-- Condicional, cuando pase esto, se muestra -->
         @defer (when this.number >= 2) {
           <p>Número de clicks en el título: <span>{{this.number}}</span></p>
         }
@@ -65,7 +68,9 @@
       <h1>Lista: </h1>
     }
 
+    <!-- track sirve para saber por qué elemento iterar. Yo elegí que itere por ID -->
     @for (elemento of this.lista; track elemento.id) {
+      <!-- Un switch -->
       @switch (elemento.nombre) {
         @case ('Pepe') {
           <h1>{{elemento.nombre}}</h1>
@@ -77,6 +82,7 @@
           <h1>NoRelevante</h1>
         }
       }
+      <!-- Si el array está vacío, muestro esto -->
     } @empty {
       <h1>No existen elementos</h1>
     }
