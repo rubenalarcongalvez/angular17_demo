@@ -1,0 +1,67 @@
+.botonTransicion {
+    background: black;
+    width: 150px;
+    height: 50px;
+    transition: 2s; /* La transición para que vuelva al estado original es de 2s para todo */
+
+    &:hover {
+        transition: width 6s linear, height 2s ease 2s; /* Así podemos establecer todas las propiedades juntas cuando se hace hover */
+        width: 100%;
+        height: 400px;
+    }
+}
+
+/* Ponemos los keyframes que tendrá la animación */
+@keyframes fromTo {
+    /* Con from y to, definimos que una propiedad cambie poco a poco (ej: pasando por los colores intermedios entre rojo y amarillo) */
+    from {
+        background-color: red;
+        position: absolute;
+        top: 0;
+    }
+    to {
+        background-color: yellow;
+        top: 100%;
+    }
+}
+@keyframes porcentajes {
+    /* Así podremos editar más poco a poco, todos los pasos que queramos */
+    0%   {
+        background-color: red;
+        width: fit-content;
+    }
+    11% {
+        font-size: 0;
+    }
+    25%  {
+        background-color: yellow;
+        width: 30%;
+        height: 100px;
+    }
+    50%  {
+        background-color: blue;
+        width: 80%;
+    }
+    100% {
+        background-color: green;
+        width: 90%;
+        height: 200px;
+    }
+}
+
+.botonAnimacionFromTo {
+    animation-name: fromTo; /* Referenciamos los keyframes que pusimos */
+    animation-duration: 5s; /* Establecemos su duración */
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in; /* Establece que la animación sea más lenta al principio */
+}
+
+.botonAnimacionPorcentajes {
+    animation-name: porcentajes; /* Referenciamos los keyframes que pusimos */
+    animation-duration: 3s; /* Establecemos su duración */
+    animation-delay: 5s; /* Establecemos el retraso de ejecución */
+    // animation-delay: -2s; /* También podemos establecerlo en negativo para que la animación empiece como si hubieran pasado ya 2s por ejemplo */
+    animation-iteration-count: 3;
+    animation-direction: alternate-reverse; /* Establece que se ejecute la animación primero al revés de lo establecido y luego al derecho */
+    animation-fill-mode: forwards; /* Se queda con el estilo puesto al final de los keyframes al principio de la animación (reemplazando el que tenía). Recordar que la animación va al revés por la animation-direction */
+}

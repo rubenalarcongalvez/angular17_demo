@@ -66,17 +66,18 @@ button {
 .boton {
   &:before {
     content:"";
-    position: absolute;
+    position: absolute; /* Establecemos la posicion absoluta y definimos su posición */
     top: 0;
     left: 0;
+    /* Ponemos que esté totalmente expandido */
     width: 100%;
     height: 100%;
-    background: none;
+    background: none; /* Pero invisible, ya que con el hover, lo haremos visible */
     transition: .5s;
   }
 
   &:hover:before {
-    background: rgba(255, 255, 255, 0.150);
+    background: rgba(255, 255, 255, 0.150); /* Le ponemos el fondo que se sobrepondrá */
   }
 }
 
@@ -137,6 +138,8 @@ button {
   border: none;
 
   &::before {
+    /* Aquí la diferencia es que simula el fondo del botón, para cuando haga hover en el after, se pueda desplegar bien para la derecha */
+    /* Lo ponemos así para que no tape las letras del elemento pero sí el fondo */
     z-index: -2;
     content: "";
     border-radius: 6px;
@@ -149,7 +152,7 @@ button {
   }
 
   &::after {
-    z-index: -1;
+    z-index: -1; /* Le damos menos importancia que al elemento para que no tape las letras pero sí el fondo al desplegar */
     content: "";
     border-radius: 6px;
     background: purple;
@@ -162,6 +165,7 @@ button {
   }
 
   &:hover::after {
+    /* Cuando despliega, se pone ancho completo y se ejecuta la transición */
     width: 100%;
   }
 }
