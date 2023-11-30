@@ -11,18 +11,21 @@
       <h1>-></h1>
     }
     
-    @if (this.title == '¡BOOM!') {
+    <!-- Podemos también poner "as NOMBRE" para poder usar el resultado de la función de dentro del if -->
+    @if (this.title == '¡BOOM!'; as resultado) {
       <div>
         <h1 (click)="mostrar()" style="cursor: pointer;" #titulo>
           {{this.title}}, llegó Angular 17
         </h1>
+        <!-- Aquí usaremos el resultado de la expresión dentro del if -->
+        <p>Dreams come {{ resultado }}</p>
   
         <!-- Cuando se hace interacción con el elemento con #titulo -->
         @defer(on interaction(titulo)) {
           <h2>Welcome to the new Angular</h2>
         }
   
-        <!-- Cuando pasen 2s con #titulo -->
+        <!-- Cuando pase 1s -->
         @defer(on timer(1s)) {
           <h3>Ready?</h3>
         } @placeholder {
@@ -68,20 +71,33 @@
       <h1>Lista: </h1>
     }
 
-    <!-- track sirve para saber por qué elemento iterar. Yo elegí que itere por ID -->
-    @for (elemento of this.lista; track elemento.id) {
-      <!-- Un switch -->
-      @switch (elemento.nombre) {
-        @case ('Pepe') {
-          <h1>{{elemento.nombre}}</h1>
+    <!-- track sirve para saber por qué elemento iterar. El elemento entero, o sub-elemento por ejemplo. 
+      Yo elegí que itere por ID. Es obligatorio -->
+      <!-- Podemos establecer un alias para cualquier indicador, ej: $index será i ahora -->
+    @for (elemento of this.lista; track elemento.id; let i = $index) {
+      <div style="display: flex; flex-direction: column;">
+        <!-- Un switch -->
+        @switch (elemento.nombre) {
+          @case ('Rosario') {
+            <h1>{{elemento.nombre}}</h1>
+          }
+          @case ('Pepe') {
+            <h1>{{elemento.nombre}} Gotera</h1>
+          }
+          @default {
+            <h1>NoRelevante</h1>
+          }
         }
-        @case ('Rosario') {
-          <h1>{{elemento.nombre}} Flores</h1>
-        }
-        @default {
-          <h1>NoRelevante</h1>
-        }
-      }
+        <!-- Estos son los posibles indicadores disponibles para usar en el bucle -->
+        <!-- Podemos abreviarlos a lo que queramos dentro de la declaración del @for -->
+        <!-- Es por eso, que no podemos utilizar ahora $index, ya que lo renombramos a i -->
+        <!-- <span style="color: blue;">Index: {{$index}}</span> -->
+        <span style="color: blue;">Index: {{i}}</span>
+        <span style="color: orange;">Primero: {{$first}}</span>
+        <span style="color: black;">Último: {{$last}}</span>
+        <span style="color: orange;">Par: {{$even}}</span>
+        <span style="color: black;">Impar: {{$odd}}</span>
+      </div>
       <!-- Si el array está vacío, muestro esto -->
     } @empty {
       <h1>No existen elementos</h1>
